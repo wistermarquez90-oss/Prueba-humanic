@@ -1,0 +1,61 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} | HUMANIC - Centro de Investigación</title>
+    <meta name="description" content={description || "Centro de Investigación Humanic de la Universidad de Los Andes. Revista científica FERMENTUM."} />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%232d5a3f'/><text x='50' y='65' font-size='45' fill='white' text-anchor='middle' font-family='Arial'>H</text></svg>" />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content={`${title} | HUMANIC`} />
+    <meta property="og:description" content={description || "Centro de Investigación Humanic - Universidad de Los Andes"} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://wistermarquez90-oss.github.io/humanic-research" />
+    
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  </head>
+  <body class="font-sans antialiased bg-humanic-light">
+    <Navbar />
+    
+    <main id="main-content">
+      <slot />
+    </main>
+    
+    <Footer />
+    
+    <!-- AOS Script -->
+    <script is:inline src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', function() {
+        AOS.init({
+          duration: 600,
+          once: true,
+          offset: 50,
+          easing: 'ease-out-cubic'
+        });
+      });
+    </script>
+  </body>
+</html>
+
+---
+import Navbar from '../components/layout/Navbar.astro';
+import Footer from '../components/layout/Footer.astro';
+---
