@@ -1,0 +1,47 @@
+---
+interface Props {
+  variant?: 'default' | 'elevated' | 'outlined' | 'featured';
+  padding?: 'none' | 'sm' | 'md' | 'lg';
+  hover?: boolean;
+  class?: string;
+  href?: string;
+}
+
+const {
+  variant = 'default',
+  padding = 'md',
+  hover = true,
+  class: className = '',
+  href
+} = Astro.props;
+
+const baseClasses = 'bg-white rounded-xl transition-all duration-300';
+
+const variantClasses = {
+  default: 'shadow-card',
+  elevated: 'shadow-card-hover',
+  outlined: 'border-2 border-humanic-navy/10',
+  featured: 'shadow-glow-lime hover:shadow-glow-lime-hover'
+};
+
+const paddingClasses = {
+  none: '',
+  sm: 'p-4',
+  md: 'p-6',
+  lg: 'p-8'
+};
+
+const hoverClasses = hover ? 'hover:-translate-y-1 hover:shadow-card-hover' : '';
+
+const finalClasses = `${baseClasses} ${variantClasses[variant]} ${paddingClasses[padding]} ${hoverClasses} ${className}`;
+---
+
+{href ? (
+  <a href={href} class={finalClasses} data-aos="fade-up">
+    <slot />
+  </a>
+) : (
+  <div class={finalClasses} data-aos="fade-up">
+    <slot />
+  </div>
+)}
