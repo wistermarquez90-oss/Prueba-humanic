@@ -1,0 +1,66 @@
+---
+interface Props {
+  label: string;
+  type?: 'text' | 'email' | 'password' | 'textarea' | 'select';
+  name: string;
+  placeholder?: string;
+  required?: boolean;
+  class?: string;
+  rows?: number;
+  options?: { value: string; label: string }[];
+}
+
+const {
+  label,
+  type = 'text',
+  name,
+  placeholder,
+  required = false,
+  class: className = '',
+  rows = 4,
+  options = []
+} = Astro.props;
+
+const baseClasses = 'w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-humanic-green focus:ring-2 focus:ring-humanic-green/20 outline-none transition-all duration-200 bg-white text-gray-900 placeholder-gray-400';
+
+const finalClasses = `${baseClasses} ${className}`;
+---
+
+<div class="space-y-2">
+  <label for={name} class="block text-sm font-medium text-humanic-dark">
+    {label}
+    {required && <span class="text-red-500 ml-1">*</span>}
+  </label>
+  
+  {type === 'textarea' ? (
+    <textarea
+      id={name}
+      name={name}
+      rows={rows}
+      placeholder={placeholder}
+      required={required}
+      class={finalClasses}
+    ></textarea>
+  ) : type === 'select' ? (
+    <select
+      id={name}
+      name={name}
+      required={required}
+      class={finalClasses}
+    >
+      <option value="">Seleccionar...</option>
+      {options.map(opt => (
+        <option value={opt.value}>{opt.label}</option>
+      ))}
+    </select>
+  ) : (
+    <input
+      type={type}
+      id={name}
+      name={name}
+      placeholder={placeholder}
+      required={required}
+      class={finalClasses}
+    />
+  )}
+</div>
