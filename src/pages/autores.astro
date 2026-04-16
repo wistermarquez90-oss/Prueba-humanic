@@ -1,0 +1,83 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Hero from '../components/layout/Hero.astro';
+import AuthorCard from '../components/shared/AuthorCard.astro';
+import SectionTitle from '../components/shared/SectionTitle.astro';
+import { authors, getAuthorsBySpecialty } from '../data/authors';
+
+// Group authors by specialty
+const specialties = [...new Set(authors.map(a => a.specialty))].sort();
+---
+
+<MainLayout title="Directorio de Autores" description="Investigadores y colaboradores del Centro de Investigación Humanic. Perfiles académicos y publicaciones.">
+  <Hero
+    variant="page"
+    title="Directorio de Autores"
+    subtitle="Nuestro Equipo de Investigación"
+    description="Conoce a los investigadores que hacen posible la revista FERMENTUM. Especialistas en economía, ciencias sociales, biología, patrimonio cultural y más."
+  />
+
+  <section class="section bg-gray-50">
+    <div class="container">
+      <!-- Stats -->
+      <div class="bg-white rounded-xl shadow-card p-6 mb-12" data-aos="fade-up">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div>
+            <p class="text-3xl font-bold text-humanic-navy">{authors.length}</p>
+            <p class="text-sm text-gray-600">Autores Activos</p>
+          </div>
+          <div>
+            <p class="text-3xl font-bold text-humanic-navy">{specialties.length}</p>
+            <p class="text-sm text-gray-600">Especialidades</p>
+          </div>
+          <div>
+            <p class="text-3xl font-bold text-humanic-navy">8</p>
+            <p class="text-sm text-gray-600">Países</p>
+          </div>
+          <div>
+            <p class="text-3xl font-bold text-humanic-navy">156</p>
+            <p class="text-sm text-gray-600">Artículos Totales</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter by Specialty -->
+      <div class="flex flex-wrap justify-center gap-3 mb-12" data-aos="fade-up">
+        <button class="px-4 py-2 rounded-full bg-humanic-navy text-white text-sm font-medium transition-all">
+          Todos
+        </button>
+        {specialties.map(specialty => (
+          <button class="px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-700 text-sm font-medium hover:border-humanic-green hover:text-humanic-green transition-all">
+            {specialty}
+          </button>
+        ))}
+      </div>
+
+      <!-- Authors Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {authors.map((author, index) => (
+          <AuthorCard author={author} />
+        ))}
+      </div>
+
+      <!-- More Authors CTA -->
+      <div class="mt-16 bg-gradient-to-r from-humanic-green/10 to-humanic-lime/10 rounded-2xl p-8 md:p-12" data-aos="fade-up">
+        <div class="max-w-2xl mx-auto text-center">
+          <h3 class="text-2xl font-bold text-humanic-navy mb-4">¿Te gustaría publicar con nosotros?</h3>
+          <p class="text-gray-600 mb-6">
+            Buscamos investigadores comprometidos con la excelencia académica y el desarrollo regional. 
+            Únete a nuestra red de colaboradores en América Latina.
+          </p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <a href="/normas" class="inline-flex items-center px-6 py-3 rounded-lg bg-humanic-navy text-white font-medium hover:bg-humanic-navy-light transition-all">
+              Normas de publicación
+            </a>
+            <a href="/contacto" class="inline-flex items-center px-6 py-3 rounded-lg border-2 border-humanic-navy text-humanic-navy font-medium hover:bg-humanic-navy hover:text-white transition-all">
+              Hacer consulta
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>
