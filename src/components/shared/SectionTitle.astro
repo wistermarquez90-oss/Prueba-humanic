@@ -1,0 +1,22 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  centered?: boolean;
+  light?: boolean;
+}
+
+const { title, subtitle, centered = true, light = false } = Astro.props;
+---
+
+<div class={`mb-12 ${centered ? 'text-center' : ''}`} data-aos="fade-up">
+  {subtitle && (
+    <p class={`font-medium tracking-widest uppercase text-sm mb-3 ${light ? 'text-humanic-bronze' : 'text-humanic-green'}`}>
+      {subtitle}
+    </p>
+  )}
+  <h2 class={`text-3xl sm:text-4xl font-bold ${light ? 'text-white' : 'text-humanic-navy'}`}>
+    {title}
+  </h2>
+  <div class={`mt-4 h-1 rounded-full ${centered ? 'mx-auto' : ''} ${light ? 'bg-humanic-lime' : 'bg-gradient-to-r from-humanic-green to-humanic-lime'}`} style="width: 80px;"></div>
+</div>
