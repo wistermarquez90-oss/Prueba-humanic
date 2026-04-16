@@ -1,0 +1,171 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Hero from '../components/layout/Hero.astro';
+import FilterBar from '../components/revista/FilterBar.astro';
+import ArticleCard from '../components/revista/ArticleCard.astro';
+import SectionTitle from '../components/shared/SectionTitle.astro';
+import { articles, getArticlesByYear, getArticlesByTag } from '../data/articles';
+import { volumes } from '../data/volumes';
+
+// Get query parameters
+const url = new URL(Astro.request.url);
+const yearParam = url.searchParams.get('year');
+const tagParam = url.searchParams.get('tag');
+const searchParam = url.searchParams.get('search');
+
+const currentYear = yearParam ? parseInt(yearParam) : null;
+const currentTag = tagParam || null;
+const currentSearch = searchParam || '';
+
+// Filter articles
+let filteredArticles = [...articles];
+
+if (currentYear) {
+  filteredArticles = getArticlesByYear(currentYear);
+}
+
+if (currentTag) {
+  filteredArticles = filteredArticles.filter(article => 
+    article.tags.some(tag => tag.toLowerCase() === currentTag.toLowerCase())
+  );
+}
+
+if (currentSearch) {
+  const searchLower = currentSearch.toLowerCase();
+  filteredArticles = filteredArticles.filter(article =>
+    article.title.toLowerCase().includes(searchLower) ||
+    article.abstract.toLowerCase().includes(searchLower) ||
+    article.authors.some(author => author.toLowerCase().includes(searchLower))
+  );
+}
+
+// Sort by year descending, then by volume/issue
+filteredArticles.sort((a, b) => {
+  if (b.year !== a.year) return b.year - a.year;
+  if (b.volume !== a.volume) return b.volume - a.volume;
+  return b.issue - a.issue;
+});
+
+// Group by year for display
+const groupedArticles = filteredArticles.reduce((acc, article) => {
+  if (!acc[article.year]) acc[article.year] = [];
+  acc[article.year].push(article);
+  return acc;
+}, {} as Record<number, typeof articles>);
+
+const sortedYears = Object.keys(groupedArticles).map(Number).sort((a, b) => b - a);
+---
+
+<MainLayout title="Revista FERMENTUM" description="Revista científica del Centro de Investigación Humanic. Accede a todos los volúmenes y artículos publicados.">
+  <Hero
+    variant="page"
+    title="Revista FERMENTUM"
+    subtitle="Publicaciones Científicas"
+    description="Repositorio completo de artículos científicos arbitrados del Centro de Investigación Humanic. Investigación interdisciplinaria en ciencias sociales, economía, biología y más."
+  />
+
+  <section class="section bg-gray-50">
+    <div class="container">
+      <!-- Stats Bar -->
+      <div class="bg-white rounded-xl shadow-card p-6 mb-8" data-aos="fade-up">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div>
+            <p class="text-3xl font-bold text-humanic-navy">{volumes.length}</p>
+            <p class="text-sm text-gray-600">Volúmenes</p>
+          </div>
+          <div>
+            <p class="text-3xl font-bold text-humanic-navy">{articles.length}</p>
+            <p class="text-sm text-gray-600">Artículos</p>
+          </div>
+          <div>
+            <p class="text-3xl font-bold text-humanic-navy">48</p>
+            <p class="text-sm text-gray-600">Autores</p>
+          </div>
+          <div>
+            <p class="text-3xl font-bold text-humanic-navy">2013</p>
+            <p class="text-sm text-gray-600">Desde</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter Bar -->
+      <form method="GET" action="/revista">
+        <FilterBar 
+          currentYear={currentYear} 
+          currentTag={currentTag} 
+          currentSearch={currentSearch} 
+        />
+      </form>
+
+      <!-- Results -->
+      {filteredArticles.length > 0 ? (
+        <div class="space-y-12">
+          {sortedYears.map(year => (
+            <div key={year}>
+              <div class="flex items-center space-x-4 mb-6">
+                <h2 class="text-2xl font-bold text-humanic-navy">{year}</h2>
+                <div class="flex-1 h-px bg-gray-200"></div>
+                <span class="text-sm text-gray-500">{groupedArticles[year].length} artículo{groupedArticles[year].length !== 1 ? 's' : ''}</span>
+              </div>
+              
+              <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {groupedArticles[year].map((article, index) => (
+                  <ArticleCard 
+                    article={article} 
+                    variant={index === 0 ? 'featured' : 'default'}
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-16" data-aos="fade-up">
+          <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">No se encontraron artículos</h3>
+          <p class="text-gray-600 mb-6">Intenta ajustar los filtros o realizar una nueva búsqueda.</p>
+          <a href="/revista" class="inline-flex items-center px-6 py-3 rounded-lg bg-humanic-green text-white font-medium hover:bg-humanic-green-dark transition-all">
+            Ver todos los artículos
+          </a>
+        </div>
+      )}
+
+      <!-- Pagination / Load More -->
+      {filteredArticles.length >= 6 && (
+        <div class="text-center mt-12">
+          <button class="inline-flex items-center px-8 py-4 rounded-lg border-2 border-humanic-navy text-humanic-navy font-semibold hover:bg-humanic-navy hover:text-white transition-all">
+            Cargar más artículos
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section bg-humanic-navy">
+    <div class="container">
+      <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
+        <h2 class="text-3xl font-bold text-white mb-4">¿Eres investigador?</h2>
+        <p class="text-gray-300 text-lg mb-8">
+          FERMENTUM recibe manuscritos originales en temas relacionados con ciencias sociales, 
+          economía, biología, patrimonio cultural y desarrollo regional.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/normas" class="inline-flex items-center px-8 py-4 rounded-lg bg-humanic-lime text-humanic-dark font-semibold hover:shadow-glow-lime transition-all">
+            Ver normas de publicación
+          </a>
+          <a href="/contacto" class="inline-flex items-center px-8 py-4 rounded-lg border-2 border-white text-white font-semibold hover:bg-white hover:text-humanic-navy transition-all">
+            Contactar al editor
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>
