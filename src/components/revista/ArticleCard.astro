@@ -1,0 +1,104 @@
+---
+import type { Article } from '../../data/types';
+
+interface Props {
+  article: Article;
+  variant?: 'default' | 'featured' | 'compact';
+}
+
+const { article, variant = 'default' } = Astro.props;
+
+const { id, title, abstract, authors, year, volume, issue, tags, citations } = article;
+
+// Truncar abstract según variante
+const maxAbstractLength = variant === 'compact' ? 100 : 180;
+const truncatedAbstract = abstract.length > maxAbstractLength 
+  ? abstract.slice(0, maxAbstractLength).trim() + '...' 
+  : abstract;
+
+// Variantes de estilo
+const cardClasses = {
+  default: 'bg-white rounded-xl shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1',
+  featured: 'bg-white rounded-xl shadow-glow-lime hover:shadow-glow-lime-hover transition-all duration-300 hover:-translate-y-1 border-2 border-humanic-lime/30',
+  compact: 'bg-white rounded-lg shadow-card hover:shadow-md transition-all duration-200'
+};
+
+const paddingClasses = {
+  default: 'p-6',
+  featured: 'p-8',
+  compact: 'p-4'
+};
+
+const titleClasses = {
+  default: 'text-lg font-semibold',
+  featured: 'text-xl font-bold',
+  compact: 'text-base font-medium'
+};
+---
+
+<article class={cardClasses[variant]} data-aos="fade-up">
+  <div class={paddingClasses[variant]}>
+    <!-- Tags -->
+    <div class="flex flex-wrap gap-2 mb-3">
+      {tags.slice(0, 3).map(tag => (
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-humanic-green/10 text-humanic-green">
+          {tag}
+        </span>
+      ))}
+      {tags.length > 3 && (
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
+          +{tags.length - 3}
+        </span>
+      )}
+    </div>
+
+    <!-- Title -->
+    <h3 class={`${titleClasses[variant]} text-humanic-navy mb-3 line-clamp-2 group`}>
+      <a href={`/revista/${id}`} class="hover:text-humanic-green transition-colors">
+        {title}
+      </a>
+    </h3>
+
+    <!-- Authors -->
+    <p class="text-sm text-gray-600 mb-3">
+      <span class="text-gray-400">Por:</span> {authors.join(', ')}
+    </p>
+
+    <!-- Abstract -->
+    <p class={`text-gray-600 mb-4 ${variant === 'compact' ? 'text-sm line-clamp-2' : 'line-clamp-3'}`}>
+      {truncatedAbstract}
+    </p>
+
+    <!-- Footer -->
+    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+      <div class="flex items-center space-x-4 text-sm text-gray-500">
+        <span class="flex items-center">
+          <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+          Vol. {volume}, N° {issue} ({year})
+        </span>
+        {citations && (
+          <span class="flex items-center">
+            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/>
+            </svg>
+            {citations} citas
+          </span>
+        )}
+      </div>
+
+      <a 
+        href={`/revista/${id}`}
+        class={`inline-flex items-center text-sm font-medium transition-colors ${
+          variant === 'featured' ? 'text-humanic-lime hover:text-humanic-green' : 'text-humanic-green hover:text-humanic-navy'
+        }`}
+      >
+        Leer más
+        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</article>
