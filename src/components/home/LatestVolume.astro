@@ -1,0 +1,98 @@
+---
+import type { Volume } from '../data/types';
+import { getLatestVolume } from '../data/volumes';
+import { getArticlesByVolume } from '../data/articles';
+
+const latestVolume: Volume = getLatestVolume();
+const articles = getArticlesByVolume(latestVolume.volume);
+---
+
+<section class="section bg-white" id="ultimo-volumen">
+  <div class="container">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <!-- Cover Image -->
+      <div data-aos="fade-right">
+        <div class="relative">
+          <div class="absolute -inset-4 bg-gradient-to-br from-humanic-lime/20 to-humanic-green/20 rounded-2xl blur-2xl"></div>
+          <div class="relative bg-gradient-to-br from-humanic-navy to-humanic-dark rounded-xl p-8 shadow-2xl">
+            <div class="aspect-[3/4] bg-gradient-to-br from-humanic-green/20 to-humanic-lime/20 rounded-lg flex flex-col items-center justify-center text-center p-6 border border-white/10">
+              <span class="text-humanic-bronze text-sm tracking-widest uppercase mb-2">Revista Científica</span>
+              <h3 class="text-5xl font-bold text-white mb-2">FERMENTUM</h3>
+              <div class="w-16 h-1 bg-humanic-lime rounded-full my-4"></div>
+              <p class="text-2xl text-white/90">Vol. {latestVolume.volume}</p>
+              <p class="text-lg text-white/70">N° {latestVolume.issue} · {latestVolume.year}</p>
+              <p class="text-sm text-humanic-bronze mt-6">{latestVolume.title}</p>
+            </div>
+          </div>
+          <!-- Floating badge -->
+          <div class="absolute -top-4 -right-4 bg-humanic-lime text-humanic-dark px-4 py-2 rounded-full font-bold shadow-lg" data-aos="zoom-in" data-aos-delay="300">
+            ¡Nuevo!
+          </div>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div data-aos="fade-left">
+        <p class="text-humanic-green font-medium tracking-widest uppercase text-sm mb-3">Edición Actual</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-humanic-navy mb-4">
+          {latestVolume.title}
+        </h2>
+        <p class="text-gray-600 text-lg mb-6">
+          {latestVolume.description}
+        </p>
+        
+        <div class="flex flex-wrap gap-4 mb-8">
+          <div class="flex items-center space-x-2 text-sm text-gray-500">
+            <svg class="w-5 h-5 text-humanic-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            <span>Publicado: {new Date(latestVolume.publishedDate).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+          </div>
+          <div class="flex items-center space-x-2 text-sm text-gray-500">
+            <svg class="w-5 h-5 text-humanic-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+            </svg>
+            <span>{articles.length} artículos</span>
+          </div>
+        </div>
+
+        <!-- Article Preview -->
+        <div class="bg-gray-50 rounded-xl p-6 mb-6">
+          <h4 class="font-semibold text-humanic-navy mb-3">Artículos incluidos:</h4>
+          <ul class="space-y-3">
+            {articles.slice(0, 2).map(article => (
+              <li class="flex items-start space-x-3">
+                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-humanic-green/10 text-humanic-green flex items-center justify-center text-xs font-bold">{article.id.split('-')[1]}</span>
+                <div>
+                  <p class="text-sm font-medium text-gray-900 line-clamp-1">{article.title}</p>
+                  <p class="text-xs text-gray-500">{article.authors.join(', ')}</p>
+                </div>
+              </li>
+            ))}
+            {articles.length > 2 && (
+              <li class="text-sm text-humanic-green font-medium pl-9">
+                +{articles.length - 2} artículos más
+              </li>
+            )}
+          </ul>
+        </div>
+
+        <div class="flex flex-wrap gap-4">
+          <a href="/revista" class="inline-flex items-center px-6 py-3 rounded-lg bg-humanic-navy text-white font-medium hover:bg-humanic-navy-light transition-all shadow-md hover:shadow-lg">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+            </svg>
+            Explorar edición
+          </a>
+          <a href="#" class="inline-flex items-center px-6 py-3 rounded-lg border-2 border-humanic-navy text-humanic-navy font-medium hover:bg-humanic-navy hover:text-white transition-all">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+            </svg>
+            Descargar PDF
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
