@@ -1,4 +1,7 @@
 ---
+import Navbar from '../components/layout/Navbar.astro';
+import Footer from '../components/layout/Footer.astro';
+
 interface Props {
   title: string;
   description?: string;
@@ -26,7 +29,7 @@ const { title, description } = Astro.props;
     <meta property="og:title" content={`${title} | HUMANIC`} />
     <meta property="og:description" content={description || "Centro de Investigación Humanic - Universidad de Los Andes"} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://wistermarquez90-oss.github.io/humanic-research" />
+    <meta property="og:url" content="https://wistermarquez90-oss.github.io/Prueba-humanic" />
     
     <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
@@ -54,8 +57,3 @@ const { title, description } = Astro.props;
     </script>
   </body>
 </html>
-
----
-import Navbar from '../components/layout/Navbar.astro';
-import Footer from '../components/layout/Footer.astro';
----
