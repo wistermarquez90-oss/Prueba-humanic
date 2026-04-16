@@ -1,0 +1,145 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Hero from '../components/layout/Hero.astro';
+import SectionTitle from '../components/shared/SectionTitle.astro';
+---
+
+<MainLayout title="Quiénes Somos" description="Conoce el Centro de Investigación Humanic de la Universidad de Los Andes. Misión, visión, líneas de investigación y equipo editorial.">
+  <Hero
+    variant="page"
+    title="Quiénes Somos"
+    subtitle="Centro de Investigación Humanic"
+    description="Un espacio de excelencia académica dedicado a la generación de conocimiento científico para el desarrollo regional de los Andes y América Latina."
+  />
+
+  <!-- Mission & Vision -->
+  <section class="section bg-white">
+    <div class="container">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div data-aos="fade-right">
+          <img 
+            src="/images/about-center.jpg" 
+            alt="Instalaciones del Centro de Investigación Humanic"
+            class="rounded-2xl shadow-2xl w-full h-96 object-cover"
+            onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 600%22><rect fill=%22%231e3a5f%22 width=%22800%22 height=%22600%22/><text fill=%22%23fff%22 x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22 font-size=%2224%22>Centro de Investigación Humanic</text></svg>'"
+          />
+        </div>
+        <div data-aos="fade-left">
+          <SectionTitle title="Nuestra Misión" centered={false} />
+          <p class="text-gray-600 text-lg mb-6 leading-relaxed">
+            Generar conocimiento científico interdisciplinario de excelencia que contribuya al desarrollo 
+            sostenible, la preservación del patrimonio cultural y el fortalecimiento de las capacidades 
+            productivas de las comunidades de los Andes venezolanos y América Latina.
+          </p>
+          
+          <SectionTitle title="Nuestra Visión" centered={false} />
+          <p class="text-gray-600 text-lg mb-6 leading-relaxed">
+            Ser reconocidos regionalmente como un referente de investigación aplicada que vincula 
+            la academia con los actores locales, promoviendo soluciones innovadoras a los desafíos 
+            del desarrollo territorial y la sostenibilidad.
+          </p>
+
+          <div class="flex items-center space-x-4 p-4 bg-humanic-lime/10 rounded-xl">
+            <div class="w-12 h-12 bg-humanic-green rounded-full flex items-center justify-center">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+              </svg>
+            </div>
+            <div>
+              <p class="font-semibold text-humanic-navy">Universidad de Los Andes</p>
+              <p class="text-sm text-gray-600">Facultad de Ciencias Económicas y Sociales</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lines of Research -->
+  <section class="section bg-gray-50">
+    <div class="container">
+      <SectionTitle title="Líneas de Investigación" />
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {[
+          {
+            icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+            title: 'Economía y Desarrollo Regional',
+            description: 'Análisis de cadenas productivas, emprendimiento local, comercio transfronterizo y políticas de desarrollo territorial.'
+          },
+          {
+            icon: 'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z',
+            title: 'Biotecnología y Biodiversidad',
+            description: 'Bioprospección de microorganismos nativos, fermentación tradicional y aplicaciones biotecnológicas sustentables.'
+          },
+          {
+            icon: 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+            title: 'Patrimonio Cultural y Turismo',
+            description: 'Estudios sobre patrimonio material e inmaterial, rutas culturales, turismo sostenible y paisajes culturales alimentarios.'
+          },
+          {
+            icon: 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+            title: 'Ciencias Sociales y Antropología',
+            description: 'Etnografía de prácticas alimentarias, estudios de consumo, identidades culturales y saberes tradicionales.'
+          },
+          {
+            icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
+            title: 'Agroecología y Sostenibilidad',
+            description: 'Sistemas productivos sostenibles, agricultura regenerativa, indicadores de sostenibilidad y adaptación al cambio climático.'
+          },
+          {
+            icon: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+            title: 'Tecnología y Comunicación',
+            description: 'Digitalización del conocimiento científico, repositorios académicos, ciencia abierta y nuevas formas de divulgación.'
+          }
+        ].map((line, index) => (
+          <div 
+            class="bg-white rounded-xl p-8 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 group"
+            data-aos="fade-up"
+            data-aos-delay={index * 100}
+          >
+            <div class="w-14 h-14 bg-humanic-green/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-humanic-green/20 transition-colors">
+              <svg class="w-7 h-7 text-humanic-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={line.icon}/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-humanic-navy mb-3">{line.title}</h3>
+            <p class="text-gray-600">{line.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Editorial Team -->
+  <section class="section bg-humanic-navy">
+    <div class="container">
+      <div class="text-center mb-12" data-aos="fade-up">
+        <p class="text-humanic-bronze font-medium tracking-widest uppercase text-sm mb-3">Equipo Editorial</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-white">Comité Editorial FERMENTUM</h2>
+        <div class="mt-4 h-1 w-20 bg-humanic-lime rounded-full mx-auto"></div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        {[
+          { role: 'Editor en Jefe', name: 'Dra. María Elena Rojas', specialty: 'Antropología Social' },
+          { role: 'Editor Adjunto', name: 'Dr. Luis Fernando Torres', specialty: 'Economía Regional' },
+          { role: 'Editor Adjunto', name: 'Dra. Diana Carolina Silva', specialty: 'Microbiología' }
+        ].map((editor, index) => (
+          <div 
+            class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center"
+            data-aos="fade-up"
+            data-aos-delay={index * 100}
+          >
+            <div class="w-20 h-20 bg-gradient-to-br from-humanic-green to-humanic-lime rounded-full flex items-center justify-center mx-auto mb-4 text-white text-2xl font-bold">
+              {editor.name.split(' ').slice(-1)[0].charAt(0)}
+            </div>
+            <p class="text-humanic-lime font-medium text-sm mb-1">{editor.role}</p>
+            <h3 class="text-white font-bold text-lg mb-1">{editor.name}</h3>
+            <p class="text-gray-400 text-sm">{editor.specialty}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</MainLayout>
