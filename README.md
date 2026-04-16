@@ -114,3 +114,5 @@ El sitio se desplegará automáticamente en `https://TU_USUARIO.github.io/humani
 ## 📄 Licencia
 
 MIT © Centro de Investigación Humanic
+
+<!-- Deploy trigger: 2026-04-16T03:29:49Z -->
