@@ -1,7 +1,7 @@
 ---
-import type { Volume } from '../data/types';
-import { getLatestVolume } from '../data/volumes';
-import { getArticlesByVolume } from '../data/articles';
+import type { Volume } from '../../data/types';
+import { getLatestVolume } from '../../data/volumes';
+import { getArticlesByVolume } from '../../data/articles';
 
 const latestVolume: Volume = getLatestVolume();
 const articles = getArticlesByVolume(latestVolume.volume);
