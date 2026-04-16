@@ -1,0 +1,108 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Hero from '../components/layout/Hero.astro';
+import LatestVolume from '../components/home/LatestVolume.astro';
+import FeaturedArticles from '../components/home/FeaturedArticles.astro';
+import Stats from '../components/home/Stats.astro';
+---
+
+<MainLayout title="Inicio" description="Centro de Investigación Humanic de la Universidad de Los Andes. Revista científica FERMENTUM.">
+  <!-- Hero Section -->
+  <Hero
+    variant="home"
+    title="HUMANIC"
+    subtitle="Centro de Investigación"
+    description="Investigación interdisciplinaria de excelencia en ciencias sociales, economía y biotecnología. Editor de la revista científica FERMENTUM de la Universidad de Los Andes."
+    cta={{ label: "Explorar Revista FERMENTUM", href: "/revista", variant: "accent" }}
+    secondaryCta={{ label: "Conoce Nuestro Equipo", href: "/autores" }}
+  />
+
+  <!-- Latest Volume -->
+  <LatestVolume />
+
+  <!-- Featured Articles -->
+  <FeaturedArticles />
+
+  <!-- Stats Section -->
+  <Stats />
+
+  <!-- Mission Section -->
+  <section class="section bg-white">
+    <div class="container">
+      <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
+        <p class="text-humanic-green font-medium tracking-widest uppercase text-sm mb-3">Nuestra Misión</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-humanic-navy mb-6">
+          Generar conocimiento científico de impacto para el desarrollo regional
+        </h2>
+        <p class="text-gray-600 text-lg mb-8 leading-relaxed">
+          En HUMANIC creemos en la investigación como motor de transformación social. Nuestro equipo de investigadores 
+          trabaja en temas críticos para los Andes venezolanos y América Latina: desarrollo económico local, 
+          patrimonio cultural, sostenibilidad agroecológica y biotecnología aplicada.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/nosotros" class="inline-flex items-center px-6 py-3 rounded-lg bg-humanic-navy text-white font-medium hover:bg-humanic-navy-light transition-all">
+            Sobre el Centro
+          </a>
+          <a href="/normas" class="inline-flex items-center px-6 py-3 rounded-lg border-2 border-humanic-navy text-humanic-navy font-medium hover:bg-humanic-navy hover:text-white transition-all">
+            Publica con Nosotros
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Links -->
+  <section class="section bg-humanic-light border-t border-gray-200">
+    <div class="container">
+      <div class="grid md:grid-cols-3 gap-8">
+        <a href="/revista" class="group bg-white rounded-xl p-8 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1" data-aos="fade-up" data-aos-delay="0">
+          <div class="w-14 h-14 bg-humanic-green/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-humanic-green/20 transition-colors">
+            <svg class="w-7 h-7 text-humanic-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-humanic-navy mb-2 group-hover:text-humanic-green transition-colors">Revista FERMENTUM</h3>
+          <p class="text-gray-600 mb-4">Accede a todos los volúmenes y artículos científicos publicados por nuestro centro.</p>
+          <span class="inline-flex items-center text-humanic-green font-medium">
+            Explorar revista
+            <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </span>
+        </a>
+
+        <a href="/autores" class="group bg-white rounded-xl p-8 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1" data-aos="fade-up" data-aos-delay="100">
+          <div class="w-14 h-14 bg-humanic-bronze/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-humanic-bronze/20 transition-colors">
+            <svg class="w-7 h-7 text-humanic-bronze" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-humanic-navy mb-2 group-hover:text-humanic-bronze transition-colors">Directorio de Autores</h3>
+          <p class="text-gray-600 mb-4">Conoce a nuestros investigadores, sus especialidades y publicaciones científicas.</p>
+          <span class="inline-flex items-center text-humanic-bronze font-medium">
+            Ver autores
+            <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </span>
+        </a>
+
+        <a href="/contacto" class="group bg-white rounded-xl p-8 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1" data-aos="fade-up" data-aos-delay="200">
+          <div class="w-14 h-14 bg-humanic-lime/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-humanic-lime/30 transition-colors">
+            <svg class="w-7 h-7 text-humanic-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-humanic-navy mb-2 group-hover:text-humanic-green transition-colors">Contacto</h3>
+          <p class="text-gray-600 mb-4">¿Tienes preguntas? ¿Quieres proponer una colaboración? Escríbenos.</p>
+          <span class="inline-flex items-center text-humanic-green font-medium">
+            Contactar
+            <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+</MainLayout>
