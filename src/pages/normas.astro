@@ -1,0 +1,211 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Hero from '../components/layout/Hero.astro';
+import SectionTitle from '../components/shared/SectionTitle.astro';
+import Card from '../components/ui/Card.astro';
+---
+
+<MainLayout title="Normas de Publicación" description="Instrucciones para autores que desean publicar en la revista científica FERMENTUM. Revisión por pares, formato y proceso editorial.">
+  <Hero
+    variant="page"
+    title="Normas de Publicación"
+    subtitle="Guía para Autores"
+    description="Todo lo que necesitas saber para enviar tu manuscrito a la revista FERMENTUM. Proceso editorial, formato requerido y criterios de evaluación."
+  />
+
+  <section class="section bg-white">
+    <div class="container">
+      <div class="grid lg:grid-cols-3 gap-12">
+        <!-- Main Content -->
+        <div class="lg:col-span-2 space-y-12">
+          <!-- Scope -->
+          <div data-aos="fade-up">
+            <SectionTitle title="Ámbito y Alcance" centered={false} />
+            <p class="text-gray-600 mb-4">
+              <strong>FERMENTUM</strong> es una revista científica semestral que publica artículos originales arbitrados 
+              en temas relacionados con: economía regional, desarrollo territorial, ciencias sociales, antropología, 
+              biotecnología, microbiología, patrimonio cultural, agroecología y sostenibilidad.
+            </p>
+            <div class="bg-humanic-lime/10 rounded-xl p-6">
+              <h4 class="font-bold text-humanic-dark mb-2">Tipos de artículos aceptados:</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-humanic-green mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <span><strong>Artículos de investigación:</strong> Reportes de investigación empírica original (máximo 8,000 palabras)</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-humanic-green mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <span><strong>Revisiones:</strong> Análisis críticos de literatura científica (máximo 10,000 palabras)</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-humanic-green mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <span><strong>Notas de investigación:</strong> Avances preliminares o estudios de caso (máximo 4,000 palabras)</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-humanic-green mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                  </svg>
+                  <span><strong>Reseñas:</strong> Revisiones de libros relevantes para el campo (máximo 2,000 palabras)</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Submission Process -->
+          <div data-aos="fade-up">
+            <SectionTitle title="Proceso de Envío y Evaluación" centered={false} />
+            <div class="space-y-6">
+              {[
+                { step: '1', title: 'Registro y envío', desc: 'Crear cuenta en el sistema editorial y subir el manuscrito en formato Word o LaTeX, incluyendo carta de presentación y declaración de originalidad.' },
+                { step: '2', title: 'Revisión editorial inicial', desc: 'El editor verifica que el manuscrito cumpla con los requisitos formales y de alcance de la revista (7-14 días).' },
+                { step: '3', title: 'Arbitraje double-blind', desc: 'Dos revisores expertos evalúan el trabajo de forma anónima. El proceso toma 6-8 semanas.' },
+                { step: '4', title: 'Decisión editorial', desc: 'El editor comunica la decisión: aceptación, aceptación con correcciones menores, revisión mayor, o rechazo.' },
+                { step: '5', title: 'Publicación', desc: 'Una vez aceptado, el artículo entra en la cola de publicación para el siguiente volumen disponible.' }
+              ].map((item, index) => (
+                <div class="flex items-start space-x-4">
+                  <div class="flex-shrink-0 w-10 h-10 rounded-full bg-humanic-navy text-white flex items-center justify-center font-bold">
+                    {item.step}
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-humanic-navy mb-1">{item.title}</h4>
+                    <p class="text-gray-600">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Formatting Guidelines -->
+          <div data-aos="fade-up">
+            <SectionTitle title="Guías de Formato" centered={false} />
+            <div class="grid md:grid-cols-2 gap-6">
+              <div class="bg-gray-50 rounded-xl p-6">
+                <h4 class="font-bold text-humanic-navy mb-4 flex items-center">
+                  <svg class="w-5 h-5 mr-2 text-humanic-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                  </svg>
+                  Estructura del manuscrito
+                </h4>
+                <ul class="space-y-2 text-sm text-gray-700">
+                  <li>• Título (máximo 15 palabras)</li>
+                  <li>• Resumen en español (150-250 palabras)</li>
+                  <li>• Abstract en inglés</li>
+                  <li>• Palabras clave (3-5, en español e inglés)</li>
+                  <li>• Introducción</li>
+                  <li>• Metodología</li>
+                  <li>• Resultados</li>
+                  <li>• Discusión</li>
+                  <li>• Conclusiones</li>
+                  <li>• Referencias bibliográficas</li>
+                </ul>
+              </div>
+              <div class="bg-gray-50 rounded-xl p-6">
+                <h4 class="font-bold text-humanic-navy mb-4 flex items-center">
+                  <svg class="w-5 h-5 mr-2 text-humanic-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+                  </svg>
+                  Especificaciones técnicas
+                </h4>
+                <ul class="space-y-2 text-sm text-gray-700">
+                  <li>• Formato: Word (.docx) o LaTeX</li>
+                  <li>• Fuente: Times New Roman 12pt</li>
+                  <li>• Interlineado: 1.5</li>
+                  <li>• Márgenes: 2.5 cm todos los lados</li>
+                  <li>• Numeración de páginas: Inferior centrada</li>
+                  <li>• Estilo de citas: APA 7ma edición</li>
+                  <li>• Tablas y figuras: Numeradas consecutivamente</li>
+                  <li>• Resolución de imágenes: 300 DPI mínimo</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Download Templates -->
+          <div class="bg-humanic-navy rounded-2xl p-8 text-center" data-aos="fade-up">
+            <h3 class="text-2xl font-bold text-white mb-4">Plantillas y Formularios</h3>
+            <p class="text-gray-300 mb-6">
+              Descarga las plantillas oficiales y formularios necesarios para tu envío.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+              <a href="#" class="inline-flex items-center px-6 py-3 rounded-lg bg-white text-humanic-navy font-medium hover:bg-humanic-lime transition-all">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                Plantilla Word
+              </a>
+              <a href="#" class="inline-flex items-center px-6 py-3 rounded-lg bg-white/10 text-white font-medium hover:bg-white/20 transition-all">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                Plantilla LaTeX
+              </a>
+              <a href="#" class="inline-flex items-center px-6 py-3 rounded-lg bg-humanic-lime text-humanic-dark font-medium hover:shadow-glow-lime transition-all">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                Guía APA 7ª Ed.
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-6">
+          <div class="bg-white rounded-xl shadow-card p-6 sticky top-24" data-aos="fade-left">
+            <h3 class="font-bold text-humanic-navy mb-4">¿Listo para enviar?</h3>
+            <p class="text-gray-600 text-sm mb-6">
+              Revisa que cumplas con todos los requisitos antes de realizar tu envío.
+            </p>
+            <a href="/contacto" class="block w-full text-center px-6 py-3 rounded-lg bg-humanic-green text-white font-medium hover:bg-humanic-green-dark transition-all mb-3">
+              Enviar manuscrito
+            </a>
+            <a href="mailto:editor@humanic.ula.ve" class="block text-center text-sm text-humanic-green hover:text-humanic-navy transition-colors">
+              Contactar al editor
+            </a>
+
+            <hr class="my-6 border-gray-200" />
+
+            <h4 class="font-semibold text-gray-900 mb-3">Tiempos de respuesta</h4>
+            <ul class="space-y-3 text-sm">
+              <li class="flex items-center text-gray-600">
+                <svg class="w-4 h-4 text-humanic-bronze mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                Revisión inicial: 7-14 días
+              </li>
+              <li class="flex items-center text-gray-600">
+                <svg class="w-4 h-4 text-humanic-bronze mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                Arbitraje: 6-8 semanas
+              </li>
+              <li class="flex items-center text-gray-600">
+                <svg class="w-4 h-4 text-humanic-bronze mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                Publicación: 2-4 meses
+              </li>
+            </ul>
+
+            <hr class="my-6 border-gray-200" />
+
+            <h4 class="font-semibold text-gray-900 mb-3">Políticas</h4>
+            <ul class="space-y-2 text-sm text-gray-600">
+              <li>• Acceso abierto (Open Access)</li>
+              <li>• Sin costos de publicación (APC)</li>
+              <li>• Licencia Creative Commons CC BY</li>
+              <li>• No se aceptan artículos simultáneos</li>
+              <li>• Compromiso ético requerido</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>
